@@ -7,13 +7,14 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import Link from "next/link";
 import { useForm } from "react-hook-form"
 import { z } from "zod"
+import { LoginProps } from "./Login.types"
 
 const formSchema = z.object({
     email: z.string().email("E-mail ou senha inválidos"),
     password: z.string().min(6, "E-mail ou senha inválidos"),
 })
 
-export function Login() {
+export function Login({ onLogin }: LoginProps) {
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -23,8 +24,7 @@ export function Login() {
     })
 
     function onSubmit(values: z.infer<typeof formSchema>) {
-        console.log(values)
-        // Handle login logic here
+        onLogin(values)
     }
 
     return (
