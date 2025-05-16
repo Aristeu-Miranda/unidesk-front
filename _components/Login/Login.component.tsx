@@ -7,14 +7,15 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import Link from "next/link";
 import { useForm } from "react-hook-form"
 import { z } from "zod"
-import { LoginProps } from "./Login.types"
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
     email: z.string().email("E-mail ou senha inválidos"),
     password: z.string().min(6, "E-mail ou senha inválidos"),
 })
 
-export function Login({ onLogin }: LoginProps) {
+export function Login() {
+    const router = useRouter()
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -24,7 +25,12 @@ export function Login({ onLogin }: LoginProps) {
     })
 
     function onSubmit(values: z.infer<typeof formSchema>) {
-        onLogin(values)
+        if (values.email === "aristeu@unidesk.com" && values.password === "aristeu123") {
+            router.push("/dashboard")
+            return
+        }
+        form.setError("email", { message: "E-mail ou senha inválidos" })
+        form.setError("password", { message: "E-mail ou senha inválidos" })
     }
 
     return (
@@ -46,7 +52,7 @@ export function Login({ onLogin }: LoginProps) {
                                     <FormItem>
                                         <FormLabel>E-mail</FormLabel>
                                         <FormControl>
-                                            <Input placeholder="nome@exemplo.com" {...field} autoComplete="off" />
+                                            <Input placeholder="nome@unidesk.com" {...field} autoComplete="off" />
                                         </FormControl>
                                     </FormItem>
                                 )}

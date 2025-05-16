@@ -6,5 +6,5 @@ const formSchema = z.object({
 })
 
 export type LoginProps = {
-    onLogin: (values: z.infer<typeof formSchema>) => void;
+    onClickLogin?: (values: z.infer<typeof formSchema>) => void;
 }

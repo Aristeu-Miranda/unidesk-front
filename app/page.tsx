@@ -12,7 +12,7 @@ export default function Home() {
         </div>
       </section>
       <section className="flex items-center justify-center w-1/2 bg-primary h-screen">
-        <Login onLogin={() => { }} />
+        <Login />
       </section>
     </main>
   );
