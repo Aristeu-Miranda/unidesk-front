@@ -18,12 +18,14 @@ export default function Tickets() {
     const itemsPerPage = 12;
 
     const sortedTickets = useMemo(() => {
-        return [...mockTickets].sort((a, b) => {
-            if (a.status === "Em aberto" && b.status !== "Em aberto") return -1;
-            if (a.status !== "Em aberto" && b.status === "Em aberto") return 1;
+        return [...mockTickets]
+            .filter(ticket => ticket.status !== "Finalizado" && ticket.status !== "Cancelado")
+            .sort((a, b) => {
+                if (a.status === "Em aberto" && b.status !== "Em aberto") return -1;
+                if (a.status !== "Em aberto" && b.status === "Em aberto") return 1;
 
-            return 0;
-        });
+                return 0;
+            });
     }, []);
 
     const totalPages = Math.ceil(sortedTickets.length / itemsPerPage);

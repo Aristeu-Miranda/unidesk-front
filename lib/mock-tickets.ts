@@ -5,8 +5,9 @@ export interface TicketData {
     registrationDate: string;
     priority: 'Alta' | 'Média' | 'Baixa';
     title: string;
-    status: 'Em aberto' | 'Aguardando usuário' | 'SLA estourado';
+    status: 'Em aberto' | 'Aguardando usuário' | 'SLA estourado' | 'Finalizado' | 'Cancelado';
     slaN1: string;
+    linkedAssets?: string[]; // Array of asset IDs
 }
 
 // Helper function to generate dates within the last 7 days
@@ -232,4 +233,24 @@ export const mockTickets: TicketData[] = [
         status: "Em aberto",
         slaN1: "48h"
     }
-]; 
+];
+
+// Function to update ticket status
+export function updateTicketStatus(ticketNumber: string, newStatus: 'Em aberto' | 'Aguardando usuário' | 'SLA estourado' | 'Finalizado' | 'Cancelado'): boolean {
+    const ticketIndex = mockTickets.findIndex(ticket => ticket.ticketNumber === ticketNumber);
+    if (ticketIndex !== -1) {
+        mockTickets[ticketIndex].status = newStatus;
+        return true;
+    }
+    return false;
+}
+
+// Function to update linked assets for a ticket
+export function updateTicketLinkedAssets(ticketNumber: string, assetIds: string[]): boolean {
+    const ticketIndex = mockTickets.findIndex(ticket => ticket.ticketNumber === ticketNumber);
+    if (ticketIndex !== -1) {
+        mockTickets[ticketIndex].linkedAssets = [...assetIds];
+        return true;
+    }
+    return false;
+} 

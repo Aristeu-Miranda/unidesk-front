@@ -49,7 +49,7 @@ export function Sidebar() {
                     />
                     <LinkSideBar
                         title="Meus chamados"
-                        href="#"
+                        href="/dashboard/mytickets"
                         icon={<LucideTicket className="w-5 h-5" />}
                         isExpanded={isExpanded}
                     />

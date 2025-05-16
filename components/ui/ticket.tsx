@@ -9,7 +9,7 @@ interface TicketProps extends React.HTMLAttributes<HTMLDivElement> {
     registrationDate?: string;
     priority?: 'Alta' | 'Média' | 'Baixa';
     title?: string;
-    status?: 'Em aberto' | 'Aguardando usuário' | 'SLA estourado';
+    status?: 'Em aberto' | 'Aguardando usuário' | 'SLA estourado' | 'Finalizado' | 'Cancelado';
     slaN1?: string;
     href?: string;
 }
