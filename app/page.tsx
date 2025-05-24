@@ -1,4 +1,5 @@
 import { Login } from "@/_components/Login";
+import { Toaster } from "@/components/ui/toaster";
 import Image from "next/image";
 
 export default function Home() {
@@ -12,6 +13,7 @@ export default function Home() {
         </div>
       </section>
       <section className="flex items-center justify-center w-1/2 bg-primary h-screen">
+        <Toaster />
         <Login />
       </section>
     </main>

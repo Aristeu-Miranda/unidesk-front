@@ -55,7 +55,7 @@ export function Sidebar() {
                     />
                     <LinkSideBar
                         title="Pesquisa avançada"
-                        href="#"
+                        href="/dashboard/search"
                         icon={<LucideSearch className="w-5 h-5" />}
                         isExpanded={isExpanded}
                     />

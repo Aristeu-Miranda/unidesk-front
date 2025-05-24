@@ -8,6 +8,7 @@ import Link from "next/link";
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { useRouter } from "next/navigation";
+import { toast } from "@/components/ui/use-toast";
 
 const formSchema = z.object({
     email: z.string().email("E-mail ou senha inválidos"),
@@ -27,6 +28,10 @@ export function Login() {
     function onSubmit(values: z.infer<typeof formSchema>) {
         if (values.email === "aristeu@unidesk.com" && values.password === "aristeu123") {
             router.push("/dashboard")
+            toast({
+                variant: "success",
+                title: "Acesso efetuado",
+            });
             return
         }
         form.setError("email", { message: "E-mail ou senha inválidos" })

@@ -37,7 +37,7 @@ export default function TicketDetail() {
     const [showAssignModal, setShowAssignModal] = useState(false);
     const [linkedAssets, setLinkedAssets] = useState<Asset[]>([]);
     const [showStatusModal, setShowStatusModal] = useState(false);
-    const [statusAction, setStatusAction] = useState<'Aguardando Usuário' | 'Cancelar' | 'Finalizar' | null>(null);
+    const [statusAction, setStatusAction] = useState<'Em atendimento' | 'Aguardando Usuário' | 'Cancelar' | 'Finalizar' | null>(null);
     const [statusCommentText, setStatusCommentText] = useState('');
 
     const notebooks = mockAssets.filter(asset => asset.category === 'notebook');
@@ -267,6 +267,10 @@ export default function TicketDetail() {
             .substring(0, 2);
     };
 
+    const assignedTicket = () => {
+        setShowAssignModal(true)
+    }
+
     return (
         <div className="h-[calc(100vh-120px)] overflow-y-auto">
             <div className="p-6">
@@ -296,6 +300,9 @@ export default function TicketDetail() {
                                     <ChevronDown className="h-4 w-4 ml-1" />
                                 </DropdownMenuTrigger>
                                 <DropdownMenuContent align="end" className="w-48">
+                                    <DropdownMenuItem onClick={() => assignedTicket()}>
+                                        Em atendimento
+                                    </DropdownMenuItem>
                                     <DropdownMenuItem onClick={() => handleStatusAction('Aguardando Usuário')}>
                                         Aguardando Usuário
                                     </DropdownMenuItem>
@@ -305,6 +312,7 @@ export default function TicketDetail() {
                                     <DropdownMenuItem onClick={() => handleStatusAction('Finalizar')}>
                                         Finalizar
                                     </DropdownMenuItem>
+
                                 </DropdownMenuContent>
                             </DropdownMenu>
                         </div>
